@@ -1,0 +1,51 @@
+Quiz 1 - Reverse Audio
+
+load ReverseAudio.mat
+% [y_orig,Fs,format] = wavread('---')
+reverse = y_rev(:,1);
+original = flipud(reverse)
+subplot(2,1,1)
+plot (reverse)
+title('Reverse')
+subplot(2,1,2)
+plot (original)
+title('Original')
+% sound(reverse, Fs)
+sound(original,Fs)
+
+# matlab
+
+Quiz 2 - Spectrum plotting
+
+function MagnitudeSpectrumPlot(yfft,f,col)
+    if nargin<3
+        col = 'b'
+    end
+    plot(f,abs(yfft),col);
+    xlabel('Frequency (Hz)')
+    ylabel('|Y(f)|')
+end
+load crickets.mat
+soundsc(crickets,Fs)
+[yfft, f] = myfft(crickets,Fs);
+MagnitudeSpectrumPlot(yfft,f,'*')
+
+# VU
+
+Quiz 3 - Filter Quality Analysis
+
+Fs = 1000;
+freq_range = [100,200];
+filt10 = fir1(10,freq_range/(Fs/2));
+filt100 = fir1(100,freq_range/(Fs/2));
+filt1000 = fir1(1000,freq_range/(Fs/2));
+[yfft, f] = myfft(filt10,Fs)
+MagnitudeSpectrumPlot(yfft,f,'*') % check Y near X = 90
+[yfft, f] = myfft(filt100,Fs)
+MagnitudeSpectrumPlot(yfft,f,'*') % check Y near X = 90
+[yfft, f] = myfft(filt1000,Fs)
+MagnitudeSpectrumPlot(yfft,f,'*') % check Y near X = 90
+
+# 1) 0.77
+# 2) 0.059
+# 3) 0.00068
