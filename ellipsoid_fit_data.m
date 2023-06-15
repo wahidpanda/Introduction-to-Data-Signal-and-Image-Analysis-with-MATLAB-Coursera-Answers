@@ -7,12 +7,12 @@ D_pca_x = D_pca(:,1);
 D_pca_y = D_pca(:,2);
 % scatter plot the data with asterisks '*'
 plot(D_pca_x,D_pca_y,'*')
+hold on
 % Define ellipse_x and ellipse_y, x and y coordinates for the PCA ellipsoid in the first 2 dimensions as a function of theta 
 theta = 2*pi*[0:100]/100;
-
 ellipse_x = 2*sqrt(eigvals(1))*cos(theta);
 ellipse_y = 2*sqrt(eigvals(2))*sin(theta);
 %Plot the ellipse with red dashed lines 'r--'
-
+plot(ellipse_x,ellipse_y,'r--')
 %Use axis equal to correct aspect ratio
 axis equal
